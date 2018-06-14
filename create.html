@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SignCon - Enjoy Your Contract Journey</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/grayscale.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="index.html">星云 SignCon</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="index.html#about">&nbsp关于&nbsp</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="index.html#download">&nbsp创建&nbsp</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="index.html#contact" name="my">&nbsp我的合同&nbsp</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<!-- Create Section -->
+<section id="download" class="download-section content-section text-center">
+    <div class="container">
+        <p>
+        <h1>创建属于你的合同</h1>
+        </p>
+        <!--<p>-->
+            <!--<button onclick="location.href='create.html'">开始创建</button>-->
+        <!--</p>-->
+
+            合同内容<br>
+            <textarea id="contentdata" rows="30" cols="50" /></textarea>
+        </p>
+        乙方钱包地址<br>
+        <p>
+            <input id="agreedata" style="width:400px" />
+        </p>
+        <p>
+            <button type="button" class="create-contract" name="create-contract" onclick="window.location.href='index.html'">确认创建并签署合同</button>
+        </p>
+        <!--
+        <div class="col-lg-8 mx-auto">
+          <h2>Download Grayscale</h2>
+          <p>You can download Grayscale for free on the preview page at Start Bootstrap.</p>
+          <a href="http://startbootstrap.com/template-overviews/grayscale/" class="btn btn-default btn-lg">Visit Download Page</a>
+        </div>
+         -->
+    </div>
+</section>
+
+
+<!-- Footer -->
+<footer>
+    <div class="container text-center">
+        <p>Copyright &copy; 星云 SignCon 2018</p>
+    </div>
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!
+
+
+
+<!-- 从这里开始是我添加的代码，你看看注释，然后在网页上试一下，看看我说清楚没 -->
+
+<!-- 和链的链接部分  下面是合约需要的文件，我放在了./lib下面  感觉整体代码有点多，把前端没用的删了就行，靠你了，加油！！！！！先看后面的注释再改-->
+<script src="lib/jquery-3.3.1.min.js"></script>
+<script src="lib/nebPay.js"></script>
+<script src="lib/nebulas.js"></script>
+<script type="text/javascript">
+    var myDate = new Date();
+    var NebPay = require("nebpay");
+    var nebPay = new NebPay();
+    var dappaddress = "n1rJWE44yJRX9F4CSt3iarhdeaChf7gCZJv";
+
+    const mycontractDisplay = document.querySelector(".get-contract");
+    const createcontractDisplay = document.querySelector(".create-contract");
+    const signcontractDisplay = document.querySelector(".sign-contract");
+
+    // 创造合约;
+    //这个合约的功能也没有问题，你在页面试一下就知道了，问题还是我弄的页面显示不好看，需要调整
+    function createContract () {
+
+        let agree = $("#agreedata").val();
+        console.log(agree);
+        let content = $("#contentdata").val().split("\n");
+        let data = "";
+        for(let i = 0; i < content.length;i++){
+            if(data == ""){
+                data += content[i];
+            }else{
+                data += "#wocaowobuxinzheyanghainengyourenchongfuyaozhenshidehuawojiuguile#" + content[i];
+            }
+        }
+        console.log(content);
+        let time = myDate.toLocaleString();
+        console.log(time);
+
+        let to = dappaddress;
+        let value = "0";
+        //var time = myDate.toLocaleString();
+        let callFunction = "set";
+        let callArgs = "[" + "\"" + agree.toString() + "\"" + "," + "\"" + data.toString() + "\"" +  "," + "\"" + time.toString() + "\""+"]";
+        console.log(callArgs);
+
+        nebPay.call(to,value,callFunction,callArgs,{
+            listener:function(resp){
+                console.log(resp.result)
+
+            }
+        })
+        alert("待区块链交易完成后，点击右上角我的合同查看已创建合同。")
+
+    }
+
+    // 签署合约;
+
+
+    // mycontractDisplay.addEventListener("click", getMyContract);
+    createcontractDisplay.addEventListener("click", createContract);
+    // signcontractDisplay.addEventListener("click", signContract);
+
+</script>
+
+</body>
+
+</html>

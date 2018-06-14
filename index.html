@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SignCon - Enjoy Your Contract Journey</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/grayscale.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="dist/css/bc.grid-1.0.0.min.css"/>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="dist/bc.grid-1.0.0.min.js"></script>
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">星云 SignCon</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#about">&nbsp关于&nbsp</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="create.html">&nbsp创建合同&nbsp</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#contact" name="my">&nbsp我的合同&nbsp</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Intro Header -->
+    <header class="masthead">
+      <div class="intro-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              <h1 class="brand-heading">星云 SignCon</h1>
+              <p class="intro-text">签约，从未如此简单！
+                <br>Make contract signing easy again!</p>
+              <a href="#about" class="btn btn-circle js-scroll-trigger">
+                <i class="fa fa-angle-double-down animated"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="content-section text-center">
+      <div class="container">
+        <p>
+          <h1>关于星云&nbspSingCon</h1>
+        </p>
+        
+
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <!--<h2>About SignCon</h2>-->
+            <p>星云 SignCon是一个基于星云链的合同签约平台。</p>
+            <p>合同数据链上存储，保障了数据公开透明及不可修改等特点。</p>
+            <p>更方便、更简单、更安全！</p>
+                 <p> 使用指南：1.创建合同：甲方点击下方开始创建按钮进入创建页面，输入合同内容及乙方钱包地址，点击"确认创建并签署合同"按钮，合同就已经创建并默认甲方已签署。</p>
+              <p>2.乙方签署合同：点击我的合同查看已有合同，点击相应合同进入合同详情。乙方未签约合同可点击"同意并签署合同"进行签约，已签约合同只可查看合同具体内容，不可重复签约。</p>
+            </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Create Section -->
+    <section id="download" class="download-section content-section text-center">
+      <div class="container">
+          <p>
+            <h1>创建属于你的合同</h1>
+          </p>
+        <p>
+          <button onclick="location.href='create.html'">开始创建</button>
+        </p>
+
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="content-section text-center">
+      <div class="container">
+          <div id = "mycontract"> 
+            <p>
+              <h1>我的合同</h1>
+              <p id="pdata"></p>
+            </p>
+
+          </div>
+        <div>
+          <div id="table"></div>
+        </div>
+        
+      
+      </div>
+    </section>
+
+
+
+    <!-- Footer -->
+    <footer>
+      <div class="container text-center">
+        <p>Copyright &copy; 星云 SignCon 2018</p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>-->
+
+    <!-- Custom scripts for this template -->
+    <!--<script src="js/grayscale.min.js"></script>-->
+
+
+
+    <!-- 从这里开始是我添加的代码，你看看注释，然后在网页上试一下，看看我说清楚没 -->
+
+    <!-- 和链的链接部分  下面是合约需要的文件，我放在了./lib下面  感觉整体代码有点多，把前端没用的删了就行，靠你了，加油！！！！！先看后面的注释再改-->
+    <script src="lib/jquery-3.3.1.min.js"></script>
+    <script src="lib/nebPay.js"></script>
+    <script src="lib/nebulas.js"></script>
+    <script type="text/javascript">
+      var myDate = new Date();
+      var NebPay = require("nebpay");
+      var nebPay = new NebPay();
+      var dappaddress = "n1rJWE44yJRX9F4CSt3iarhdeaChf7gCZJv";
+
+      const mycontractDisplay = document.querySelector(".get-contract");
+      const createcontractDisplay = document.querySelector(".create-contract");
+      const signcontractDisplay = document.querySelector(".sign-contract");
+
+      // 创造合约;
+      //这个合约的功能也没有问题，你在页面试一下就知道了，问题还是我弄的页面显示不好看，需要调整
+      function createContract () {
+
+        let agree = $("#agreedata").val();
+        console.log(agree);
+        let content = $("#contentdata").val();
+        console.log(content);
+        let time = myDate.toLocaleString();
+        console.log(time);
+
+        let to = dappaddress;
+        let value = "0";
+        //var time = myDate.toLocaleString();
+        let callFunction = "set";
+        let callArgs = "[" + "\"" + agree.toString() + "\"" + "," + "\"" + content.toString() + "\"" +  "," + "\"" + time.toString() + "\""+"]";
+        console.log(callArgs);
+
+        nebPay.call(to,value,callFunction,callArgs,{
+          listener:function(resp){
+            console.log(resp.result);
+            let data = JSON.parse(resp.result);
+            console.log(data);
+          }
+        })
+      }
+
+      // 签署合约;
+      //这个合约还没有调，这个等你把个人合同的显示和按钮弄好之后我再弄把
+      //这样明天就不一定能弄完了，弄不完就下周，尽量做好点拿奖
+      function signContract () {
+
+        let time = myDate.toLocaleString();
+        //这里id 要获取到 选中的准备签约的合同id,我先舍一个默认值进行测试
+        //let id = 
+        let id = "5";
+
+        let to = dappaddress;
+        let value = "0";
+        //var time = myDate.toLocaleString();
+        let callFunction = "sign";
+        let callArgs = "[" + "\"" + id.toString() + "\"" + "," + "\"" + time.toString() + "\"" +"]";
+
+        nebPay.call(to,value,callFunction,callArgs,{
+          listener:function(resp){
+            console.log(resp.result);
+          }
+        })
+      }
+
+      // 查询个人合约;
+      // 这部分的功能没有问题，数据都能返回，就是有点慢，你在页面可以看到，但是需要你把页面显示做的好看一点，
+      // 每个合同显示在一个方格或者什么，而且status==0的合约，也就是还没有签署的合约，要有一个签署的按钮;
+      function getMyContract () {
+        let to = dappaddress;
+        let value = "0";
+        //var time = myDate.toLocaleString();
+        let callsaveFunction = "foreach";
+        let callsaveArgs = "";
+
+
+
+        function link(id,status){
+            //由于是一个新的技术，你可以通过下面的代码检测你的浏览器是否支持
+            if (window.localStorage) {
+                //存储变量的值
+                localStorage.id = id.toString();
+                localStorage.status = status.toString();
+                //localStorage.type = wallet.toString();
+                location.href = 'detail.html';
+            } else {
+                alert("请更新浏览器至最新版本！");
+            }
+            // return id.toString().link('detail.html')
+        }
+
+        nebPay.simulateCall(to,value,callsaveFunction,callsaveArgs,{
+          listener:function(resp){
+            if(resp.result=="\"\""){
+              console.log("~~~~~");
+              $('#pdata').text("你还没有合同，去创建你的第一个合同吧");
+            }else{
+              console.log("hello");
+              console.log(resp.result);
+              console.log("hello");
+              //console.log(resp.result.substring(7,resp.result.length-1));
+              let data = resp.result.substring(1,resp.result.length-1);
+              //let contracts = data.split("_value:");
+              let contracts = data.split("-");
+              let alldata = [];
+              //var alldata = [{"id":1,"create":"Wang","agree":"Li","createtime":1,"agreetime":"1","content":"139****9517","status":1},
+              //   {"id":2,"create":"Zhang","agree":"Li","createtime":1,"agreetime":"1","content":"139****9517","status":0}]
+
+              for (let i = 0; i<contracts.length; i++){
+                console.log(contracts[i])
+                let tmp = JSON.parse("\""+contracts[i]+"\"")
+                console.log(tmp)
+                var res = JSON.parse(tmp)
+                console.log("res--------"+res.createtime)
+                alldata.push(res)
+              }
+
+
+              $(function () {
+                  var grid=BCGrid.create("#table",{
+                      columns: [
+                          // {id: 'id', name: 'id', display: 'ID', align: 'center', hide: true},
+                          //{name: "key",display:'合同编号'},
+                          {name: 'create',display:'甲方'},
+                          {name: 'agree',display:'乙方'},
+                          //{name: 'createtime',display:'合同创建时间'},
+                          //{name: 'agreetime',display:'合同生效时间'},
+                          //{name: 'content',display:'合同内容'},
+                          {name: 'status',display:'合同状态', render: function (item, index) {
+                                  if (item.status == 0) {
+                                      return "未签约";
+                                  }
+                                  else if (item.status == 1) {
+                                      return "已签约";
+                                  }
+                              }},
+                      ],
+                      dataSource:'local',
+                      localData:alldata,
+                      onRowClick: function (rowIndex, rowData) { //行点击事件
+                          link(rowData.key,rowData.status);
+                      },
+                  });
+
+              });
+            }
+          }
+        })
+      }
+
+      $(function(){
+          getMyContract();
+      })
+
+
+    </script>
+  
+  </body>
+
+</html>

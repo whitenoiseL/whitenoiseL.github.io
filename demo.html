@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BC Gird</title>
+    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="dist/css/bc.grid-1.0.0.min.css"/>
+	
+    <script src="js/jquery.min.js"></script>
+    <script src="dist/bc.grid-1.0.0.min.js"></script>
+	
+</head>
+<body>
+<div>
+    <div id="table"></div>
+</div>
+<script>
+    var data = [{"id":1,"pid":0,"name":"Li","age":1,"gender":1,"email":"bigq517@qq.com","mobile":"139****9517","sign":"Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!"},
+        ];
+    $(function () {
+        var grid=BCGrid.create("#table",{
+            columns: [
+                {id: 'id', name: 'id', display: 'ID', align: 'center', hide: true},
+                {
+                    id: 'name', name: 'name', display: 'Name'
+                },
+                {
+                    name: 'gender', display: 'Gender', render: function (item, index) {
+                    if (item.gender == 1) {
+                        return "Boy".link("https://www.baidu.com")
+                    }
+                    else if (item.gender == 2) {
+                        return "Girl";
+                    }
+                }
+                },
+                {name: 'age', display: 'Age', format: '{value}Years', enableSort: true},
+                {name: 'email', display: 'Email', enableSort: true},
+                {name: 'mobile', display: 'Mobile'}
+
+            ],
+            dataSource:'local',
+            localData:data
+        });
+
+
+
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SignCon - Enjoy Your Contract Journey</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/grayscale.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="index.html">星云 SignCon</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="index.html#about">&nbsp关于&nbsp</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="index.html#download">&nbsp创建&nbsp</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="index.html#contact" name="my">&nbsp我的合同&nbsp</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+<!-- Create Section -->
+<section id="download" class="download-section content-section text-center">
+    <div class="container">
+        <p>
+        <h1>创建属于你的合同</h1>
+        </p>
+
+        合同创建时间<br>
+
+        <textarea id="createtimedata" rows="1" cols="50" readonly/></textarea>
+        </p>
+        </p>
+
+        合同签约时间<br>
+
+        <textarea id="agreetimedata" rows="1" cols="50" readonly/></textarea>
+        </p>
+        </p>
+
+        合同内容<br>
+
+        <textarea id="contentdata" rows="30" cols="50" readonly/></textarea>
+        </p>
+
+        <p>
+            <button type="button" class="sign-contract" name="sign-contract" id="sign-contract">同意并签署合约</button>
+        </p>
+
+    </div>
+</section>
+
+
+<!-- Footer -->
+<footer>
+    <div class="container text-center">
+        <p>Copyright &copy; 星云 SignCon 2018</p>
+    </div>
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+
+
+
+<!-- 从这里开始是我添加的代码，你看看注释，然后在网页上试一下，看看我说清楚没 -->
+
+<!-- 和链的链接部分  下面是合约需要的文件，我放在了./lib下面  感觉整体代码有点多，把前端没用的删了就行，靠你了，加油！！！！！先看后面的注释再改-->
+<script src="lib/jquery-3.3.1.min.js"></script>
+<script src="lib/nebPay.js"></script>
+<script src="lib/nebulas.js"></script>
+<script type="text/javascript">
+    var myDate = new Date();
+    var NebPay = require("nebpay");
+    var nebPay = new NebPay();
+    var dappaddress = "n1rJWE44yJRX9F4CSt3iarhdeaChf7gCZJv";
+    let id = localStorage.id;
+    let status = localStorage.status;
+    let party = "0";
+    //alert(id);
+    //alert(status);
+
+    console.log("id------------"+id +"-----"+ typeof(id) )
+    console.log("status------------"+status)
+
+
+function getMyContract (id){
+        let to = dappaddress;
+        let value = 0;
+        let type = "1";
+        //var time = myDate.toLocaleString();
+        let callFunction = "get";
+        let callArgs = "[" + "\"" + id + "\""  + "]";
+
+        console.log("id------------"+callArgs)
+
+        nebPay.simulateCall(to,value,callFunction,callArgs,{
+          listener:function(resp){
+            console.log("result----------"+resp.result)
+            let parts = resp.result.split("_");
+            party = parts[0].substring(1)
+            let contract = "\""+parts[1]
+            let tmp = JSON.parse(contract)
+            let res = JSON.parse(tmp);
+            console.log(party)
+            console.log(res.content);
+            let data = res.content.replace(/#wocaowobuxinzheyanghainengyourenchongfuyaozhenshidehuawojiuguile#/g,"\n")
+            $('#createtimedata').text(res.createtime)
+            $('#agreetimedata').text(res.agreetime)
+            $('#contentdata').text(data)
+
+            const signcontractDisplay = document.querySelector(".sign-contract");
+            signcontractDisplay.addEventListener("click", signContract);
+
+            let btn = document.getElementById("sign-contract");
+            console.log("test")
+            if (status == "1" || (status == "0" && party == "0")){
+                btn.style.display = "none";
+                console.log("display-------"+status+"-------"+party);
+            } 
+          }
+        })
+      }
+
+    // 签署合约;
+    //这个合约还没有调，这个等你把个人合同的显示和按钮弄好之后我再弄把
+    //这样明天就不一定能弄完了，弄不完就下周，尽量做好点拿奖
+    async function signContract () {
+
+        let time = myDate.toLocaleString();
+        //这里id 要获取到 选中的准备签约的合同id,我先舍一个默认值进行测试
+        //let id =
+        let key = id;
+        let to = dappaddress;
+        let value = "0";
+        //var time = myDate.toLocaleString();
+        let callFunction = "sign";
+        let callArgs = "[" + "\"" + key.toString() + "\"" + "," + "\"" + time.toString() + "\"" +"]";
+
+        await nebPay.call(to,value,callFunction,callArgs,{
+            listener:function(resp){
+                console.log("resp------------："+resp);
+                console.log("result："+resp.result);
+                alert("待区块链交易完成后，合同将签署成功。")
+            }
+        })
+
+
+    }
+
+
+    getMyContract (id);
+    console.log("---------------------")
+
+
+   
+
+    // mycontractDisplay.addEventListener("click", getMyContract);
+    // createcontractDisplay.addEventListener("click", createContract);
+    
+
+</script>
+
+</body>
+
+</html>
